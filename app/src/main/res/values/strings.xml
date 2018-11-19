@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AMazeBySkylarBarrera</string>
+    <string name="title_activity_amaze">AMazeActivity</string>
+    <string name="title_activity_winning">WinningActivity</string>
+</resources>

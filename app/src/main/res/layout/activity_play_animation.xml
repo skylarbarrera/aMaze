@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".gui.PlayAnimationActivity">
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="376dp"
+        android:layout_height="420dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="switchState2Winning"
+        android:text="Go2Winning"
+        app:layout_constraintBottom_toTopOf="@+id/toggleSolutionButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/toggleMapButton"
+        style="@android:style/Widget.Holo.Button.Toggle"
+        android:layout_width="86dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="8dp"
+        android:checked="true"
+        android:text="Map"
+        android:textOff="Map"
+        android:textOn="Map"
+        android:textSize="18sp"
+        android:typeface="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/toggleSolutionButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintVertical_bias="0.083" />
+
+    <ToggleButton
+        android:id="@+id/toggleSolutionButton"
+        style="@android:style/Widget.Holo.Button.Toggle"
+        android:layout_width="92dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="40dp"
+        android:checked="true"
+        android:text="Map"
+        android:textOff="Solution"
+        android:textOn="Solution"
+        android:textSize="18sp"
+        android:typeface="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/toggleWalls"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/toggleMapButton" />
+
+    <ToggleButton
+        android:id="@+id/toggleWalls"
+        style="@android:style/Widget.Holo.Button.Toggle"
+        android:layout_width="125dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:checked="true"
+        android:text="Map"
+        android:textOff="Visible Walls"
+        android:textOn="Visible Walls"
+        android:textSize="18sp"
+        android:typeface="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/toggleSolutionButton"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <ProgressBar
+        android:id="@+id/energyBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="8dp"
+        android:max="3000"
+        android:progress="3000"
+        android:progressDrawable="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="@+id/button2" />
+
+    <Button
+        android:id="@+id/scaleMapUp"
+        android:layout_width="35dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="scaleMapUp"
+        android:text="+"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/toggleMapButton"
+        app:layout_constraintEnd_toStartOf="@+id/toggleSolutionButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/scaleMapDown"
+        app:layout_constraintTop_toBottomOf="@+id/toggleMapButton" />
+
+    <Button
+        android:id="@+id/scaleMapDown"
+        android:layout_width="35dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="scaleMapDown"
+        android:text="-"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/scaleMapUp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleMapButton" />
+
+</android.support.constraint.ConstraintLayout>
