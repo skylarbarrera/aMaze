@@ -142,6 +142,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
      * @param view
      */
     public void pauseAnim(View view){
+        //ill pause
         if (paused) {
             paused = false;
             Toast.makeText(this, "Animation Paused", Toast.LENGTH_SHORT).show();
