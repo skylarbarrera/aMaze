@@ -9,21 +9,33 @@ import edu.wm.cs.cs301.skylarbarrera.R;
 public class WinningActivity extends AppCompatActivity {
 
     private TextView energyConsumed;
-    private TextView pathLength;
+    private TextView pathLengthV;
     private TextView shortestLen;
-    int energy = 540;
-    int pathLen = 240;
+    String energy ;
+    String pathLength;
+    String driver;
     int shortest = 25;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_winning);
-
+        energy = getIntent().getStringExtra("Energy");
+        pathLength = getIntent().getStringExtra("Path");
+        driver = getIntent().getStringExtra("Driver");
         energyConsumed = (TextView)findViewById(R.id.energyConsumedText);
-        energyConsumed.setText("EnergyConsumed: " + energy);
-        pathLength = (TextView)findViewById(R.id.pathLengthText);
-        pathLength.setText("PathLength: " + pathLen);
+        energyConsumed.setText(" ");
+
+        if (!driver.equals("Manual")){
+            energyConsumed.setText("EnergyConsumed: " + energy);
+        }
+
+
+
+
+        pathLengthV = (TextView)findViewById(R.id.pathLengthText);
+        pathLengthV.setText("PathLength: " + 678);
         shortestLen = (TextView)findViewById(R.id.shortestPathText);
         shortestLen.setText("Shortest Path Length: " + shortest);
     }

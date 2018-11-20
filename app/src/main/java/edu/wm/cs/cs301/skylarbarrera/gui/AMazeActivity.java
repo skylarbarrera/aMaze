@@ -123,6 +123,10 @@ public class AMazeActivity extends AppCompatActivity {
         //TODO: Take in config values and pass to GeneratingActivity
 
         Intent intent = new Intent(this,GeneratingActivity.class );
+        intent.putExtra("MazeDifValue",MazeDifValue);
+        intent.putExtra("Gen", chosenGen);
+        intent.putExtra("Driver", chosenDriver);
+
         Toast.makeText(getApplicationContext(), "Explore Button Pressed", Toast.LENGTH_SHORT).show();
         Log.v("AMaze - Explore", "Explore Config: Diff - " + MazeDifValue + " Gen - " +chosenGen + "Driver - " + chosenDriver);
 
