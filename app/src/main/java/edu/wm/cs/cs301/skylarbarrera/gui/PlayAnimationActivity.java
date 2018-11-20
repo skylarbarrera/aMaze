@@ -147,6 +147,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
             Toast.makeText(this, "Animation Paused", Toast.LENGTH_SHORT).show();
             Log.v("Anim - PlayPause", "Animation Paused");
         } else {
+            // pausing
             paused = true;
             Toast.makeText(this, "Animation UnPaused", Toast.LENGTH_SHORT).show();
             Log.v("Anim - PlayPause", "Animation UnPaused");
