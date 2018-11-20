@@ -17,6 +17,10 @@ public class WinningActivity extends AppCompatActivity {
     int shortest = 25;
 
 
+    /**
+     * Takes in all passed instnace info and sets variables, displays winning prompt
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

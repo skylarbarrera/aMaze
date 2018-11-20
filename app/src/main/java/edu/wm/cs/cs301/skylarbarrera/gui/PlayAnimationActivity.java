@@ -93,7 +93,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     *Switches State to Winning Screen, passes in relevent info(PathLength & Energy
      * @param view
      */
     public void switchState2Winning(View view){
@@ -105,7 +105,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     *Switches state to Losing Screen, passes in relevent info(PathLength & Energy
      * @param view
      */
     public void switchState2Losing(View view){
@@ -118,7 +118,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     * Scales Map Overlap Up by 1
      * @param view
      */
     public void scaleMapUp(View view){
@@ -127,13 +127,20 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
 
     }
-
+    /**
+     * Scales Map Overlap Down by 1
+     * @param view
+     */
     public void scaleMapDown(View view){
         Toast.makeText(this, "Map Scaled Down", Toast.LENGTH_SHORT).show();
         Log.v("Anim - MapScale", "Map Scaled Down");
 
     }
 
+    /**
+     * Pause/Plays Driver Animation depending on state of paused
+     * @param view
+     */
     public void pauseAnim(View view){
         if (paused) {
             paused = false;

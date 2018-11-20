@@ -118,6 +118,10 @@ public class AMazeActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Switches state to Generating, Passes in all neccessary information
+     * @param view
+     */
     public void  exploreMazeButton(View view){
 
         //TODO: Take in config values and pass to GeneratingActivity
@@ -134,6 +138,11 @@ public class AMazeActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
+    /**
+     * Revisit Button
+     * Switches state to Generating, passes in relevent info to load maze
+     * @param view
+     */
     public void  revisitMazeButton(View view){
 
         //TODO: Take in config values and pass to GeneratingActivity

@@ -74,6 +74,11 @@ public class GeneratingActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Switches state to Playing depending on Driver Var, passes on relevent info
+     * @param view
+     */
+
     public void switchStateGentoPlay() {
         boolean bool = driver.equals("Manual");
         Intent intentAnim = new Intent(this, PlayAnimationActivity.class);

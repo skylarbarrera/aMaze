@@ -85,7 +85,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
 
 }
 
-
+    /**
+     *Switches State to Winning Screen, passes in relevent info(PathLength & Energy
+     * @param view
+     */
     public void switchState2Winning(View view){
         Intent intent = new Intent(this,WinningActivity.class );
         Toast.makeText(getApplicationContext(), "Switching State to Winning", Toast.LENGTH_SHORT).show();
@@ -97,7 +100,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-
+    /**
+     * Scales Map Overlap Up by 1
+     * @param view
+     */
     public void scaleMapUp(View view){
         Toast.makeText(this, "Map Scaled Up", Toast.LENGTH_SHORT).show();
         Log.v("Manual - Map Scale", "Scaled Up");
@@ -105,6 +111,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Scales Map Overlap Down by 1
+     * @param view
+     */
     public void scaleMapDown(View view){
         Toast.makeText(this, "Map Scaled Down", Toast.LENGTH_SHORT).show();
         Log.v("Manual - Map Scale", "Scaled Down");
@@ -112,19 +122,35 @@ public class PlayManuallyActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Moves Robot Forward, Simulates "button press"
+     * @param view
+     */
     public void moveUp(View view){
         Toast.makeText(this, "Move Player Up", Toast.LENGTH_SHORT).show();
         Log.v("Manual - Move", "Move Up");
     }
+    /**
+     * Moves Robot Backward, Simulates "button press"
+     * @param view
+     */
     public void moveDown(View view){
         Toast.makeText(this, "Move Player Down", Toast.LENGTH_SHORT).show();
         Log.v("Manual - Move", "Move Down");
     }
+    /**
+     * Rotates Robot Left, Simulates "button press"
+     * @param view
+     */
     public void moveLeft(View view){
         Toast.makeText(this, "Move Player Left", Toast.LENGTH_SHORT).show();
         Log.v("Manual - Move", "Move Left");
     }
 
+    /**
+     * Rotates Robot Right, Simulates "button press"
+     * @param view
+     */
     public void moveRight(View view){
         Toast.makeText(this, "Move Player Right", Toast.LENGTH_SHORT).show();
         Log.v("Manual - Move", "Move Right");
