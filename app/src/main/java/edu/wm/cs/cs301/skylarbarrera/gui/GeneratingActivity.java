@@ -10,13 +10,21 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import edu.wm.cs.cs301.skylarbarrera.R;
+import edu.wm.cs.cs301.skylarbarrera.generation.MazeConfiguration;
+import edu.wm.cs.cs301.skylarbarrera.generation.MazeFactory;
+import edu.wm.cs.cs301.skylarbarrera.generation.Order;
+import edu.wm.cs.cs301.skylarbarrera.generation.StubOrder;
 
 public class GeneratingActivity extends AppCompatActivity {
 
     private ProgressBar genBar;
     private String driver;
     private String Gen;
-    private String mazeDif;
+    private int mazeDif;
+    private StubOrder.Builder builder;
+    public fakeGen fakeG;
+    private GeneratingActivity myself = this;
+    public static MazeConfiguration mazeBuild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,20 +34,50 @@ public class GeneratingActivity extends AppCompatActivity {
         //TODO: store map config params, based on selection - different intents
         driver = getIntent().getStringExtra("Driver");
         Gen = getIntent().getStringExtra("Gen");
-        mazeDif = getIntent().getStringExtra("MazeDifValue");
+        mazeDif = getIntent().getIntExtra("MazeDifValue", 0);
+
+        switch(Gen){
+
+            case "Eller":
+                builder = StubOrder.Builder.Eller;
+                break;
+            case "DFS":
+                builder = StubOrder.Builder.DFS;
+                break;
+            case "Kruskal":
+                builder = StubOrder.Builder.Kruskal;
+                break;
+            case "Prim":
+                builder = StubOrder.Builder.Prim;
+                break;
+        }
+
 
 
         genBar = (ProgressBar)findViewById(R.id.progGenBar);
-        new fakeGen().execute();
+        mazeFactory();
 
+       fakeG = new fakeGen();
+       fakeG.execute();
+
+    }
+
+    public void updatedProg(int progress){
+        fakeG.updateprod(progress);
     }
 
     class fakeGen extends AsyncTask<Void, Integer, Integer>{
 
+        public void updateprod(int progress){
+            publishProgress(progress);
+            onProgressUpdate(progress);
+        }
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             genBar.setMax(100);
+
+
         }
 
         @Override
@@ -51,16 +89,22 @@ public class GeneratingActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(Void... voids) {
 
+            Order order = new StubOrder(myself);
 
-            for( int i = 0; i < 100; i++){
-                publishProgress(i);
-                try{
-                    Thread.sleep(50);
+            ((StubOrder) order).setBuilder(builder);
+            Log.v("testing" , " " + order.getBuilder());
+            ((StubOrder) order).setSkillLevel(mazeDif);
+            ((StubOrder) order).setPerfect(true);
+            MazeFactory mazeFact = new MazeFactory();
+            mazeFact.order(order);
 
-                } catch (InterruptedException ie){
-                    ie.printStackTrace();
-                }
-            }
+            mazeFact.waitTillDelivered();
+
+            int[]  startPos =((StubOrder) order).getMazeConfiguration().getStartingPosition();
+            MazeSingleton ms = MazeSingleton.getInstance();
+            ms.setData(((StubOrder) order).getMazeConfiguration());
+           // mazeBuild = ((StubOrder) order).getMazeConfiguration();
+            Log.v("MazeFact", "startPOS = " + startPos[0] + " " + startPos[1]);
             return null;
         }
 
@@ -72,6 +116,16 @@ public class GeneratingActivity extends AppCompatActivity {
 
 
         }
+    }
+
+
+    public void mazeFactory(){
+
+
+
+
+
+
     }
 
     /**

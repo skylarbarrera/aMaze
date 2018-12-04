@@ -24,7 +24,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
     private Switch wallsToggle;
     private String driver;
     private String Gen;
-    private String mazeDif;
+    private int mazeDif;
     private int energy = 240;
     private int pathLength = 169;
 
@@ -34,7 +34,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play_animation);
         driver = getIntent().getStringExtra("Driver");
         Gen = getIntent().getStringExtra("Gen");
-        mazeDif = getIntent().getStringExtra("MazeDifValue");
+        mazeDif = getIntent().getIntExtra("MazeDifValue",0);
 
 
         mapToggle = (ToggleButton) findViewById(R.id.toggleMapButton);

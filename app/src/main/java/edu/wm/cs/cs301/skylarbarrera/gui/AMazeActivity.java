@@ -26,12 +26,12 @@ public class AMazeActivity extends AppCompatActivity {
     private int MazeDriver;
 
     private Spinner mazeGenSpinner;
-    private String[] mazeGen = new String[]{"DFS Alg", "Prim's Alg", "Eller's Alg"};
+    private String[] mazeGen = new String[]{"DFS", "Prim", "Eller", "Kruskal"};
     private String chosenGen;
    // private int[] MazeGenValue = new String[]{0,1,2};
 
     private Spinner mazeDriverSpinner;
-    private String[] mazeDriver = new String[]{"Manual", "Wizard", "WallFollower", "Explorer", "Pledge's"};
+    private String[] mazeDriver = new String[]{"Manual", "Wizard", "WallFollower", "Explorer", "Pledge"};
     private String chosenDriver;
     private SeekBar MazeDif;
     int MazeDifValue;

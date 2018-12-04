@@ -24,18 +24,18 @@
         android:layout_height="0dp"
         android:onClick="moveLeft"
         android:text="Left"
-        app:layout_constraintBottom_toTopOf="@+id/downButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/upButton" />
 
     <Button
         android:id="@+id/downButton"
         android:layout_width="0dp"
-        android:layout_height="140dp"
+        android:layout_height="40dp"
         android:onClick="moveDown"
         android:text="Down"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ToggleButton
@@ -96,7 +96,6 @@
         android:layout_height="0dp"
         android:onClick="moveRight"
         android:text="Right"
-        app:layout_constraintBottom_toTopOf="@+id/downButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/leftButton"
         app:layout_constraintTop_toBottomOf="@+id/upButton" />
@@ -127,15 +126,18 @@
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="288dp"
+        android:layout_marginBottom="44dp"
         android:elevation="2dp"
         android:onClick="switchState2Winning"
         android:text="Go2Winning"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mazePanel4"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Switch
         android:id="@+id/toggleSolutionButtonMan"
@@ -162,4 +164,22 @@
         android:elevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <edu.wm.cs.cs301.skylarbarrera.gui.MazePanel
+        android:id="@+id/mazePanel4"
+        android:layout_width="411dp"
+        android:layout_height="299dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/downButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rightButton"
+        app:layout_constraintVertical_bias="0.01" />
+
+
 </android.support.constraint.ConstraintLayout>

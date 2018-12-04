@@ -11,6 +11,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import edu.wm.cs.cs301.skylarbarrera.R;
+import edu.wm.cs.cs301.skylarbarrera.generation.MazeConfiguration;
 
 public class PlayManuallyActivity extends AppCompatActivity {
 
@@ -19,7 +20,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private Switch wallsToggle;
     private String driver;
     private String Gen;
-    private String mazeDif;
+    private int mazeDif;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
 
         driver = getIntent().getStringExtra("Driver");
         Gen = getIntent().getStringExtra("Gen");
-        mazeDif = getIntent().getStringExtra("MazeDifValue");
+        mazeDif = getIntent().getIntExtra("MazeDifValue", 0);
 
     //TODO: Add map scale, new UI & & Toasts
 
@@ -82,7 +83,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
         }
     });
 
-
+        MazeSingleton ms = MazeSingleton.getInstance();
+        MazeConfiguration mc = ms.getData();
+       int[] starter =  mc.getStartingPosition();
+       Log.v("starter check","yeet - " +starter[0] + " " + starter[1] );
 }
 
     /**
