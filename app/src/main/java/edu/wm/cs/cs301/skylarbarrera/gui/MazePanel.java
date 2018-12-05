@@ -29,7 +29,7 @@ public class MazePanel extends View {
     private TextPaint mTextPaint;
     private float mTextWidth;
     private float mTextHeight;
-    private Canvas bitCanvas;
+    private Canvas canvas;
     private Paint paint;
     private int paddingLeft ;
     private int paddingTop ;
@@ -55,6 +55,8 @@ public class MazePanel extends View {
 
     private void init(AttributeSet attrs, int defStyle) {
         bitmap = Bitmap.createBitmap(1200,1200,Bitmap.Config.ARGB_8888);
+        canvas = new Canvas(bitmap);
+        paint = new Paint();
 
 
 
@@ -68,7 +70,7 @@ public class MazePanel extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        paint = new Paint();
+
 
 
 
@@ -86,8 +88,11 @@ public class MazePanel extends View {
 
         Log.v("Project6","MazePanel: onDraw called.");
 
-        canvas.drawBitmap(bitmap, 0,0,paint);
-        tester(canvas);
+        //canvas.drawBitmap(bitmap, 0,0,paint);
+        //tester(canvas);
+        //setColor(0,255,0);
+        //fillOval(paddingLeft+110,paddingTop,100,100);
+        canvas.drawBitmap(bitmap, 50,50,paint);
     }
 
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -98,18 +103,18 @@ public class MazePanel extends View {
 
     public void tester(Canvas canvas){
         setColor(255,0,0);
-        fillOval(paddingLeft,paddingTop,100,100,canvas);
+        fillOval(paddingLeft,paddingTop,100,100);
         setColor(0,255,0);
-        fillOval(paddingLeft+110,paddingTop,100,100,canvas);
+        fillOval(paddingLeft+110,paddingTop,100,100);
         setColor(255,255,0);
-        fillRect(paddingLeft,paddingTop+250,200,100,canvas);
+        fillRect(paddingLeft,paddingTop+250,200,100);
         setColor(0,0,255);
         int[] xP = {0,0,100,200,200};
         int[] yP = {500,550,525,550,500};
-        fillPolygon(xP,yP,5,canvas);
+        fillPolygon(xP,yP,5);
         setColor(50,100,80);
         paint.setStrokeWidth(10);
-        drawLine(0,0,500,500,canvas);
+        drawLine(0,0,500,500);
 
     }
 
@@ -122,11 +127,7 @@ public class MazePanel extends View {
         //Color col = new Color(rgb[0], rgb[1], rgb[2]);
         paint.setARGB(255,rgb[0],rgb[1],rgb[2]);
     }
-    /**
-     * Wrapper Method to update color of graphics
-     * sets the Color to the given value
-     * @param rgb
-     */
+
     public void setColor(int r, int g, int b) {
         //Color col = new Color(rgb[0], rgb[1], rgb[2]);
         paint.setARGB(255,r,g,b);
@@ -138,11 +139,13 @@ public class MazePanel extends View {
      * @param width
      * @param height
      */
-    public void fillRect(int x, int y, int width, int height, Canvas canvas) {
-        Rect rect =  new Rect(x,y,width, height);
+    public void fillRect(int x, int y, int width, int height) {
+        //Rect rect =  new Rect(x,y,width, height);
+        Rect rect = new Rect(x,y, x+width, y+height );
 
 
         canvas.drawRect(rect,paint);;
+
     }
 
 
@@ -152,7 +155,7 @@ public class MazePanel extends View {
      * @param yPoints
      * @param nPoints
      */
-    public void fillPolygon(int[] xPoints, int[] yPoints, int nPoints, Canvas canvas) {
+    public void fillPolygon(int[] xPoints, int[] yPoints, int nPoints) {
 
 
         Path polyPath = new Path();
@@ -174,7 +177,7 @@ public class MazePanel extends View {
      * @param x2
      * @param y2
      */
-    public void drawLine(int x1, int y1, int x2, int y2, Canvas canvas) {
+    public void drawLine(int x1, int y1, int x2, int y2) {
 
 
         canvas.drawLine(x1, y1, x2, y2, paint);
@@ -187,7 +190,7 @@ public class MazePanel extends View {
      * @param width
      * @param height
      */
-    public void fillOval(int x, int y, int width, int height, Canvas canvas) {
+    public void fillOval(int x, int y, int width, int height) {
         RectF oval;
 
 

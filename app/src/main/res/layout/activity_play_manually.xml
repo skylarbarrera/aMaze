@@ -10,11 +10,13 @@
     <Button
         android:id="@+id/upButton"
         android:layout_width="0dp"
-        android:layout_height="141dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="492dp"
         android:onClick="moveUp"
         android:text="Up"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,21 +24,14 @@
         android:id="@+id/leftButton"
         android:layout_width="200dp"
         android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
         android:onClick="moveLeft"
         android:text="Left"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upButton" />
-
-    <Button
-        android:id="@+id/downButton"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:onClick="moveDown"
-        android:text="Down"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/upButton" />
 
     <ToggleButton
         android:id="@+id/toggleMapButtonMan"
@@ -52,10 +47,9 @@
         android:textOn="Map"
         android:textSize="18sp"
         android:typeface="normal"
+        android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@+id/scaleMapUp2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/scaleMapDown2"
-        app:layout_constraintTop_toTopOf="@+id/upButton" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/scaleMapUp2"
@@ -67,77 +61,54 @@
         android:layout_marginRight="8dp"
         android:onClick="scaleMapUp"
         android:text="+"
-        app:layout_constraintEnd_toEndOf="@+id/upButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/toggleMapButtonMan"
-        app:layout_constraintTop_toTopOf="@+id/upButton" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/scaleMapDown2"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="35dp"
         android:layout_height="38dp"
-        android:layout_marginStart="248dp"
-        android:layout_marginLeft="248dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="552dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:onClick="scaleMapDown"
         android:text="-"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/mazePanel4"
         app:layout_constraintEnd_toStartOf="@+id/toggleMapButtonMan"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/upButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleMapButton" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/rightButton"
-        android:layout_width="188dp"
-        android:layout_height="0dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
         android:onClick="moveRight"
         android:text="Right"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/leftButton"
-        app:layout_constraintTop_toBottomOf="@+id/upButton" />
+        app:layout_constraintHorizontal_bias="0.893"
+        app:layout_constraintStart_toEndOf="@+id/leftButton" />
 
     <ProgressBar
         android:id="@+id/energyBar2"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="150dp"
-        android:layout_height="10dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:elevation="2dp"
         android:max="3000"
+
         android:progress="2000"
         android:progressDrawable="@android:color/holo_red_dark"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/upButton"
-        tools:visibility="visible"
-
-        />
-
-    <Button
-        android:id="@+id/button"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="128dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="44dp"
-        android:elevation="2dp"
-        android:onClick="switchState2Winning"
-        android:text="Go2Winning"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mazePanel4"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
     <Switch
         android:id="@+id/toggleSolutionButtonMan"
@@ -167,19 +138,13 @@
 
     <edu.wm.cs.cs301.skylarbarrera.gui.MazePanel
         android:id="@+id/mazePanel4"
-        android:layout_width="411dp"
-        android:layout_height="299dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/downButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rightButton"
-        app:layout_constraintVertical_bias="0.01" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.403" />
 
 
 </android.support.constraint.ConstraintLayout>
