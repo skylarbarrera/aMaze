@@ -151,8 +151,8 @@ public class PlayManuallyActivity extends AppCompatActivity {
      * for this state.
      */
     protected void startDrawer() {
-        firstPersonView = new FirstPersonDrawer(Constants.VIEW_WIDTH,
-                Constants.VIEW_HEIGHT, Constants.MAP_UNIT,
+        firstPersonView = new FirstPersonDrawer(1400,
+                1400, Constants.MAP_UNIT,
                 Constants.STEP_SIZE, seenCells, mazeConfig.getRootnode()) ;
         mapView = new MapDrawer(seenCells, 15, mazeConfig) ;
         // draw the initial screen for this state
