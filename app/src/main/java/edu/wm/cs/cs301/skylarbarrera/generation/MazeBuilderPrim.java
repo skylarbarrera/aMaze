@@ -22,6 +22,7 @@ public class MazeBuilderPrim extends MazeBuilder implements Runnable {
 	
 	public MazeBuilderPrim() {
 		super();
+		//context = con;
 		System.out.println("MazeBuilderPrim uses Prim's algorithm to generate maze.");
 	}
 	

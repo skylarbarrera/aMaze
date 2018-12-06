@@ -1,6 +1,12 @@
 package edu.wm.cs.cs301.skylarbarrera.generation;
 
+import android.util.Log;
+
+import java.io.File;
+
 import edu.wm.cs.cs301.skylarbarrera.gui.Constants;
+import edu.wm.cs.cs301.skylarbarrera.gui.MazeFileReader;
+import edu.wm.cs.cs301.skylarbarrera.gui.MazeFileWriter;
 
 
 /**
@@ -40,17 +46,19 @@ public class MazeBuilder implements Runnable {
 	static final int MAX_TRIES = 250 ; // room generation: max number of tries to find a random location for a room
 	static final int MIN_ROOM_DIMENSION = 3; // room generation: min dimension
 	static final int MAX_ROOM_DIMENSION = 8; // room generation: max dimension
-
+	//private File context;
 	/**
 	 * Constructor for a randomized maze generation
 	 */
 	public MazeBuilder(){
+		//context = con;
 		random = SingleRandom.getRandom();
 	}
 	/**
 	 * Constructor with option to make maze generation deterministic or random
 	 */
 	public MazeBuilder(boolean deterministic){
+		//context = con;
 		if (true == deterministic)
 		{
 			// Control random number generation
@@ -111,7 +119,7 @@ public class MazeBuilder implements Runnable {
 			final int colchange = random.nextIntWithinInterval(0, 255); // used in the constructor for Segments  class Seg
 			final BSPBuilder b = new BSPBuilder(order, dists, cells, width, height, colchange, expectedPartiters) ;
 			BSPNode root = b.generateBSPNodes(); // takes a long time, updates progressbar, 
-			// it also internally checks for cancel requests
+			// it also internally checks for cancelƒ requests
 			// and throws an interrupted exception if that happens
 
 			Thread.sleep(SLEEP_INTERVAL) ; // test if thread has been interrupted, i.e. notified to stop
@@ -125,7 +133,82 @@ public class MazeBuilder implements Runnable {
 			mazeConfig.setRootnode(root);
 			mazeConfig.setStartingPosition(startx, starty);
 			System.out.println("STARTING LOCATION "+ startx + " " + starty);
-			order.updateProgress(100); // Order interface promises to communicate 100% upon delivery
+
+			MazeFileWriter mazeWriter = new MazeFileWriter();
+
+			//File file = new File(getFilesDir(), filename);
+			String filename = "lastMaze.xml";
+			if (order.getSkillLevel() == 0){
+				filename = "Maze0.xml";
+				filename = order.getContext().getPath() + "/" + filename;
+				File file = new File( filename);
+				file.delete();
+				try {
+					boolean newFile = file.createNewFile();
+					Log.v("aaaa", "maze0 created? "+ newFile);
+					Log.v("aaaa", "maze0 - " + filename);
+
+				} catch(Exception e){
+					e.printStackTrace();
+				}
+
+			} else if (order.getSkillLevel() == 1){
+				filename = "Maze1.xml";
+				filename = order.getContext().getPath() + "/" + filename;
+				File file = new File( filename);
+				file.delete();
+				try {
+					boolean newFile = file.createNewFile();
+
+				} catch(Exception e){
+					e.printStackTrace();
+				}
+
+			} else  if (order.getSkillLevel() == 2){
+				filename = "Maze2.xml";
+				filename = order.getContext().getPath() + "/" + filename;
+				File file = new File( filename);
+				file.delete();
+				try {
+					boolean newFile = file.createNewFile();
+
+				} catch(Exception e){
+					e.printStackTrace();
+				}
+
+			}else if (order.getSkillLevel() == 3){
+				filename = "Maze3.xml";
+				filename = order.getContext().getPath() + "/" + filename;
+				File file = new File( filename);
+				file.delete();
+				try {
+					boolean newFile = file.createNewFile();
+
+				} catch(Exception e){
+					e.printStackTrace();
+				}
+
+			} else{
+				filename = "lastMaze.xml";
+				filename = order.getContext().getPath() + "/" + filename;
+				File file = new File( filename);
+				file.delete();
+				try {
+					boolean newFile = file.createNewFile();
+
+				} catch(Exception e){
+					e.printStackTrace();
+				}
+
+
+			}
+			mazeWriter.store(order.getContext(), filename, width, height, rooms, expectedPartiters, root, cells, dists.getAllDistanceValues(), startx, starty);
+
+			if (order.getAct() != null ) {
+
+
+				order.updateProgress(100);
+			}// Order interface promises to communicate 100% upon delivery
 			order.deliver(mazeConfig);
             // reset order and other fields for safe repeated operation and garbage collection
 			reset() ;

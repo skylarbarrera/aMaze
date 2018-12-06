@@ -1,6 +1,10 @@
 package edu.wm.cs.cs301.skylarbarrera.generation;
 
 
+import java.io.File;
+
+import edu.wm.cs.cs301.skylarbarrera.gui.GeneratingActivity;
+
 /**
  * An order describes functionality needed to order a maze from
  * the maze factory. It allows for asynchronous production 
@@ -10,6 +14,10 @@ package edu.wm.cs.cs301.skylarbarrera.generation;
  *
  */
 public interface Order {
+
+	GeneratingActivity getAct();
+
+	File getContext();
 	/**
 	 * Gives the required skill level, range of values 0,1,2,...,15
 	 */

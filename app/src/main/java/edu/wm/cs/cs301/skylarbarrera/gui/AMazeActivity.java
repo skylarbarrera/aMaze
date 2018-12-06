@@ -71,6 +71,8 @@ public class AMazeActivity extends AppCompatActivity {
             }
         });
 
+        MazeStore ms = new MazeStore(getFilesDir());
+
         mazeDriverSpinner = (Spinner)findViewById(R.id.mazeDriverSpinner);
         ArrayAdapter<String> mazeDriverAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, mazeDriver);
         mazeDriverSpinner.setAdapter(mazeDriverAdapter);
@@ -130,6 +132,7 @@ public class AMazeActivity extends AppCompatActivity {
         intent.putExtra("MazeDifValue",MazeDifValue);
         intent.putExtra("Gen", chosenGen);
         intent.putExtra("Driver", chosenDriver);
+        intent.putExtra("Revisit", false);
 
         Toast.makeText(getApplicationContext(), "Explore Button Pressed", Toast.LENGTH_SHORT).show();
         Log.v("AMaze - Explore", "Explore Config: Diff - " + MazeDifValue + " Gen - " +chosenGen + "Driver - " + chosenDriver);
@@ -151,7 +154,10 @@ public class AMazeActivity extends AppCompatActivity {
         Intent intent = new Intent(this,GeneratingActivity.class );
         Toast.makeText(getApplicationContext(), "Revisit Button Pressed", Toast.LENGTH_SHORT).show();
         Log.v("AMaze - Revisit", "Revisit Config: Diff - " + MazeDifValue + " Gen - " +chosenGen + "Driver - " + chosenDriver);
-
+        intent.putExtra("MazeDifValue",MazeDifValue);
+        intent.putExtra("Gen", chosenGen);
+        intent.putExtra("Driver", chosenDriver);
+        intent.putExtra("Revisit", true);
 
         this.startActivity(intent);
     }

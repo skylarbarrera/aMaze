@@ -35,10 +35,10 @@ public class MazeFileWriter {
 	/**
 	 * Write maze content to a file
 	 */
-	public static void store(String filename, int width, int height, int rooms, int expected_partiters, BSPNode root, Cells cells, int[][] dists, int startX, int startY)
+	public static void store(File context, String filename, int width, int height, int rooms, int expected_partiters, BSPNode root, Cells cells, int[][] dists, int startX, int startY)
 	{
 		 try {
-			 	// get a document 
+
 				DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 				Document doc = docBuilder.newDocument();
@@ -51,7 +51,8 @@ public class MazeFileWriter {
 				TransformerFactory transformerFactory = TransformerFactory.newInstance();
 				Transformer transformer = transformerFactory.newTransformer();
 				DOMSource source = new DOMSource(doc);
-				StreamResult result = new StreamResult(new File(filename));
+				//filename = context.getPath() + "/" +filename;
+				StreamResult result = new StreamResult(new File( filename));
 		 
 				transformer.transform(source, result);
 			  } catch (ParserConfigurationException pce) {

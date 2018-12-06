@@ -14,6 +14,7 @@ import edu.wm.cs.cs301.skylarbarrera.generation.Seg;
 
 //import java.awt.Color;
 import java.io.File;
+
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -59,7 +60,7 @@ public class MazeFileReader {
 	 * Provides the data loaded from file wrapped in a MazeConfiguration.
 	 * @return maze configuration loaded from file
 	 */
-	MazeConfiguration getMazeConfiguration() {
+	public MazeConfiguration getMazeConfiguration() {
 		MazeConfiguration mazeConfig = new MazeContainer() ;
 		mazeConfig.setHeight(getHeight());
 		mazeConfig.setWidth(getWidth());
@@ -107,7 +108,7 @@ public class MazeFileReader {
 	{
 		try{
 
-			File fXmlFile = new File(filename);
+			File fXmlFile = new File( filename);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);

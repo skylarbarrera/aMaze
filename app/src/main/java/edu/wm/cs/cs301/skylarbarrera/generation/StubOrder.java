@@ -2,6 +2,8 @@ package edu.wm.cs.cs301.skylarbarrera.generation;
 
 import android.os.AsyncTask;
 
+import java.io.File;
+
 import edu.wm.cs.cs301.skylarbarrera.gui.GeneratingActivity;
 
 public class StubOrder implements Order {
@@ -11,6 +13,7 @@ public class StubOrder implements Order {
 	private boolean perfect;
 	private MazeConfiguration mazeConfiger ;
 	private GeneratingActivity genAct;
+	private File context;
 	
 	public StubOrder() {
 		
@@ -19,6 +22,18 @@ public class StubOrder implements Order {
 
 	public StubOrder(GeneratingActivity genActs){
 		genAct = genActs;
+	}
+
+	public GeneratingActivity getAct(){
+		return genAct;
+	}
+
+	public File getContext() {
+		return context;
+	}
+
+	public void setContext(File con){
+		context = con;
 	}
 
 	@Override
@@ -63,7 +78,9 @@ public class StubOrder implements Order {
 
 	@Override
 	public void updateProgress(int percentage) {
-		genAct.updatedProg(percentage);
+		if (genAct != null) {
+			genAct.updatedProg(percentage);
+		}
 	}
 
 }
