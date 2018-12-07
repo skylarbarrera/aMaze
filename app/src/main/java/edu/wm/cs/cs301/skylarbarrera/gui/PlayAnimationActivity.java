@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -46,16 +47,47 @@ public class PlayAnimationActivity extends AppCompatActivity {
     private Cells seenCells;
     private boolean started;
 
-    private int energy = 240;
-    private int pathLength = 169;
-
+    //private int energy = 240;
+    //private int pathLength = 169;
+    private int Odom;
+    private int Battery;
+    private BasicRobot robot;
+    private ProgressBar pb;
 
     @Override
     protected void onStart() {
         super.onStart();
-        BasicRobot robot = new BasicRobot(this);
+        MazeSingleton ms = MazeSingleton.getInstance();
+        mazeConfig = ms.getData();
+        driver = getIntent().getStringExtra("Driver");
+        robot = new BasicRobot(this);
+        //private String[] mazeDriver = new String[]{"Manual", "Wizard", "WallFollower", "Explorer", "Pledge"};
+
         final WallFollower wf = new WallFollower();
-        wf.setRobot(robot);
+        final Wizard wz = new Wizard(mazeConfig);
+        final Explorer ex = new Explorer();
+        final Pledge pl = new Pledge();
+        switch(driver){
+            case "WallFollower":
+
+                wf.setRobot(robot);
+                break;
+            case "Wizard":
+
+                wz.setRobot(robot);
+                break;
+            case"Explorer":
+
+                ex.setRobot(robot);
+                break;
+            case"Pledge":
+
+                pl.setRobot(robot);
+                break;
+
+
+        }
+
 
         class proveAsync extends AsyncTask<Integer, Void, Void> {
 
@@ -65,7 +97,26 @@ public class PlayAnimationActivity extends AppCompatActivity {
             @Override
             protected Void doInBackground(Integer... integers) {
                 try {
-                    wf.drive2Exit();
+                    switch(driver){
+                        case "WallFollower":
+
+                            wf.drive2Exit();
+                            break;
+                        case "Wizard":
+
+                            wz.drive2Exit();
+                            break;
+                        case"Explorer":
+
+                            ex.drive2Exit();
+                            break;
+                        case"Pledge":
+
+                            pl.drive2Exit();
+                            break;
+
+
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -95,7 +146,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_animation);
-        driver = getIntent().getStringExtra("Driver");
+
         Gen = getIntent().getStringExtra("Gen");
         mazeDif = getIntent().getIntExtra("MazeDifValue",0);
 
@@ -153,6 +204,9 @@ public class PlayAnimationActivity extends AppCompatActivity {
        });
 
        panel = findViewById(R.id.mazePanelAnim);
+
+        pb = (ProgressBar) findViewById(R.id.energyBar);
+        //pb.setProgress((int)robot.getBatteryLevel());
 
        MazeSingleton ms = MazeSingleton.getInstance();
        mazeConfig = ms.getData();
@@ -326,12 +380,16 @@ public class PlayAnimationActivity extends AppCompatActivity {
         // update maze direction only after intermediate steps are done
         // because choice of direction values are more limited.
         setDirectionToMatchCurrentAngle();
+        pb.setProgress((int)robot.getBatteryLevel());
         //logPosition(); // debugging
     }
 
     public void walkWrap(  int dir){
 
        walk(dir);
+        if (robot.hasStopped()){
+            switchState2Losing();
+        }
 
 
 //Start
@@ -341,6 +399,9 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
     public void rotateWrap( int dir){
        rotate(dir);
+       if (robot.hasStopped()){
+           switchState2Losing();
+       }
 
 
 
@@ -365,8 +426,13 @@ public class PlayAnimationActivity extends AppCompatActivity {
             slowedDownRedraw();
         }
         setCurrentPosition(px + dir*dx, py + dir*dy) ;
+
+        if(isOutside(px ,py )){
+            switchState2Winning();
+        }
         walkStep = 0; // reset counter for next time
         //logPosition(); // debugging
+        pb.setProgress((int)robot.getBatteryLevel());
     }
 
     /**
@@ -391,8 +457,12 @@ public class PlayAnimationActivity extends AppCompatActivity {
     public void switchState2Winning(){
         Intent intent = new Intent(this,WinningActivity.class );
         Log.v("Anim - switch2Winning", "Switching State to Winning");
-        intent.putExtra("Path", pathLength);
-        intent.putExtra("Energy", energy);
+        intent.putExtra("Odom", robot.getOdometerReading());
+        intent.putExtra("Battery", robot.getBatteryLevel());
+        //intent.putExtra("Odom", Odom);
+        int[] start = mazeConfig.getStartingPosition();
+        intent.putExtra("short", mazeConfig.getDistanceToExit(start[0], start[1]));
+
         this.startActivity(intent);
     }
 
@@ -400,12 +470,14 @@ public class PlayAnimationActivity extends AppCompatActivity {
      *Switches state to Losing Screen, passes in relevent info(PathLength & Energy
      * @param view
      */
-    public void switchState2Losing(View view){
+    public void switchState2Losing(){
         Intent intent = new Intent(this,LosingActivity.class );
         Log.v("Anim - switch2Losing", "Switching State to Losing");
-
-        intent.putExtra("Path", pathLength);
-        intent.putExtra("Energy", energy);
+        intent.putExtra("Odom", robot.getOdometerReading());
+        intent.putExtra("Battery", robot.getBatteryLevel());
+        int[] start = mazeConfig.getStartingPosition();
+        intent.putExtra("short", mazeConfig.getDistanceToExit(start[0], start[1]));
+        //intent.putExtra("Energy", energy);
         this.startActivity(intent);
     }
 

@@ -16,10 +16,10 @@ public class MazeStore {
     MazeStore(File cont){
         context = cont;
 
-        Order order0 = new StubOrder();
-        Order order1 = new StubOrder();
-        Order order2 = new StubOrder();
-        Order order3 = new StubOrder();
+        final Order order0 = new StubOrder();
+        final Order order1 = new StubOrder();
+        final Order order2 = new StubOrder();
+        final Order order3 = new StubOrder();
 
         ((StubOrder) order0).setContext(context);
         ((StubOrder) order1).setContext(context);

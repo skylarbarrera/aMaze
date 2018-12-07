@@ -11,10 +11,10 @@ public class WinningActivity extends AppCompatActivity {
     private TextView energyConsumed;
     private TextView pathLengthV;
     private TextView shortestLen;
-    String energy ;
-    String pathLength;
+    int energy ;
+    int  pathLength;
     String driver;
-    int shortest = 25;
+    int shortest ;
 
 
     /**
@@ -25,21 +25,21 @@ public class WinningActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_winning);
-        energy = getIntent().getStringExtra("Energy");
-        pathLength = getIntent().getStringExtra("Path");
-        driver = getIntent().getStringExtra("Driver");
+        energy = getIntent().getIntExtra("Battery", energy);
+        pathLength = getIntent().getIntExtra("Odom", pathLength);
+        shortest = getIntent().getIntExtra("short",shortest);
         energyConsumed = (TextView)findViewById(R.id.energyConsumedText);
         energyConsumed.setText(" ");
 
-        if (!driver.equals("Manual")){
-            energyConsumed.setText("EnergyConsumed: " + energy);
-        }
+
+        energyConsumed.setText("EnergyConsumed: " + energy);
+
 
 
 
 
         pathLengthV = (TextView)findViewById(R.id.pathLengthText);
-        pathLengthV.setText("PathLength: " + 678);
+        pathLengthV.setText("PathLength: " + pathLength);
         shortestLen = (TextView)findViewById(R.id.shortestPathText);
         shortestLen.setText("Shortest Path Length: " + shortest);
     }

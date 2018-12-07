@@ -1,14 +1,16 @@
 package edu.wm.cs.cs301.skylarbarrera.gui;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -54,9 +56,12 @@ public class MazePanel extends View {
     }
 
     private void init(AttributeSet attrs, int defStyle) {
-        bitmap = Bitmap.createBitmap(1200,1200,Bitmap.Config.ARGB_8888);
+        bitmap = Bitmap.createBitmap(1440,4000,Bitmap.Config.ARGB_8888);
         canvas = new Canvas(bitmap);
         paint = new Paint();
+
+
+
 
 
 
@@ -95,11 +100,11 @@ public class MazePanel extends View {
         canvas.drawBitmap(bitmap, 50,50,paint);
     }
 
-    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    /*public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int size = Math.min(getMeasuredWidth(), getMeasuredHeight());
         setMeasuredDimension(size, size);
-    }
+    }*/
 
     public void tester(Canvas canvas){
         setColor(255,0,0);
@@ -129,7 +134,11 @@ public class MazePanel extends View {
     }
 
     public void setColor(int r, int g, int b) {
-        //Color col = new Color(rgb[0], rgb[1], rgb[2]);
+        //if (r ==119 && g == 119){
+
+        //}
+
+
         paint.setARGB(255,r,g,b);
     }
     /**
@@ -142,12 +151,32 @@ public class MazePanel extends View {
     public void fillRect(int x, int y, int width, int height) {
         //Rect rect =  new Rect(x,y,width, height);
         Rect rect = new Rect(x,y, x+width, y+height );
-
-
+        Bitmap patternBMP = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.grass);
+        BitmapShader shader = new BitmapShader(patternBMP, Shader.TileMode.REPEAT,Shader.TileMode.MIRROR);
+        paint.setShader(shader);
         canvas.drawRect(rect,paint);;
+        paint.setShader(null);
 
     }
 
+
+    /**
+     * Wrapper Method to draw a filled in Rect
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     */
+    public void fillRectTop(int x, int y, int width, int height) {
+        //Rect rect =  new Rect(x,y,width, height);
+        Rect rect = new Rect(x,y, x+width, y+height );
+        //Bitmap patternBMP = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.grass);
+        //BitmapShader shader = new BitmapShader(patternBMP, Shader.TileMode.REPEAT,Shader.TileMode.MIRROR);
+        //paint.setShader(shader);
+        canvas.drawRect(rect,paint);;
+        paint.setShader(null);
+
+    }
 
     /**
      * Wrapper Method to draw a Polygon
@@ -167,7 +196,11 @@ public class MazePanel extends View {
         }
         polyPath.lineTo(xPoints[0],yPoints[0]);
 
+        Bitmap patternBMP = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.starynight);
+        BitmapShader shader = new BitmapShader(patternBMP, Shader.TileMode.REPEAT,Shader.TileMode.MIRROR);
+        paint.setShader(shader);
         canvas.drawPath(polyPath,paint);
+        paint.setShader(null);
     }
 
     /**

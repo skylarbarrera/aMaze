@@ -56,9 +56,10 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:elevation="2dp"
+        android:indeterminate="false"
         android:max="3000"
-        android:progress="2000"
 
+        android:progress="3000"
         android:progressDrawable="@android:color/holo_red_dark"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"

@@ -37,7 +37,9 @@ public class BasicRobot  implements Robot {
 	
 	
 	
-
+public BasicRobot(){
+	BatteryLevel = 3000;
+}
 	
 	/**
 	 * init

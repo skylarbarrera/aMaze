@@ -214,7 +214,7 @@ public class FirstPersonDrawer {
 		// black rectangle in upper half of screen
 		int[] black = {0,0,0};
 		mp.setColor(black);
-		mp.fillRect(0, 0, viewWidth, viewHeight/2);
+		mp.fillRectTop(0, 0, viewWidth, viewHeight/2);
 		// grey rectangle in lower half of screen
 		int[] darkGray = {119,119,119};
 		mp.setColor(darkGray);

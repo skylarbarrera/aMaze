@@ -13,7 +13,7 @@ public class Wizard implements RobotDriver {
 	
 	private BasicRobot robot; 
 	//private Cells cells;
-	private PlayAnimationActivity control;
+	private MazeConfiguration control;
 	private int width;
 	
 	private int height;
@@ -24,8 +24,8 @@ public class Wizard implements RobotDriver {
 		setRobot(r);		
 	}
 	
-	public Wizard() {
-		
+	public Wizard(MazeConfiguration mc) {
+		control = mc;
 	}
 	
 	
@@ -83,15 +83,15 @@ public class Wizard implements RobotDriver {
 		if (robot.isAtExit())
 			return null;
 		// find best candidate
-		int dnext = control.getMazeConfiguration().getDistanceToExit(x, y) ;
+		int dnext = control.getDistanceToExit(x, y) ;
 		int[] result = new int[3] ;
 		int[] dir;
 		for (CardinalDirection cd: CardinalDirection.values()) {
-			if (control.getMazeConfiguration().getMazecells().hasWall(x, y, cd)) 
+			if (control.getMazecells().hasWall(x, y, cd))
 				continue; // there is a wall
 			// no wall, let's check the distance
 			dir = cd.getDirection();
-			int dn = control.getMazeConfiguration().getDistanceToExit(x+dir[0], y+dir[1]);
+			int dn = control.getDistanceToExit(x+dir[0], y+dir[1]);
 			System.out.println("diection - " + cd+ " distance to exit - "+ dn);
 			
 			if (dn < dnext) {
@@ -117,11 +117,11 @@ public class Wizard implements RobotDriver {
 			}	
 		}
 		// expectation: we found a neighbor that is closer
-		assert(control.getMazeConfiguration().getDistanceToExit(x, y) > dnext) : 
+		assert(control.getDistanceToExit(x, y) > dnext) :
 			"cannot identify direction towards solution: stuck at: " + x + ", "+ y ;
 		// since assert statements need not be executed, check it 
 		// to avoid giving back wrong result
-		return (control.getMazeConfiguration().getDistanceToExit(x, y) > dnext) ? result : null;
+		return (control.getDistanceToExit(x, y) > dnext) ? result : null;
 	}
 	
 	/**

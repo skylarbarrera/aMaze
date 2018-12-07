@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -31,7 +32,8 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private boolean showMaze;
     private boolean showSolution;
     private boolean mapMode;
-
+    int Battery;
+    int Odom;
     int px, py;
     int dx,dy;
 
@@ -47,7 +49,8 @@ public class PlayManuallyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_manually);
-
+        Battery = 3000;
+        Odom = 0;
         driver = getIntent().getStringExtra("Driver");
         Gen = getIntent().getStringExtra("Gen");
         mazeDif = getIntent().getIntExtra("MazeDifValue", 0);
@@ -116,6 +119,24 @@ public class PlayManuallyActivity extends AppCompatActivity {
         }
     });
        panel = (MazePanel) findViewById(R.id.mazePanel4);
+
+        panel.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()){
+            @Override
+            public void onSwipeLeft() {
+                super.onSwipeLeft();
+                moveRight();
+
+            }
+
+            @Override
+            public void onSwipeRight() {
+                super.onSwipeRight();
+                moveLeft();
+            }
+
+
+
+        });
 
 
 
@@ -313,6 +334,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
         }
         setCurrentPosition(px + dir*dx, py + dir*dy) ;
         walkStep = 0; // reset counter for next time
+        Odom += 1;
+
+
         //logPosition(); // debugging
     }
 
@@ -358,6 +382,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
         intent.putExtra("MazeDifValue",mazeDif);
         intent.putExtra("Gen", Gen);
         intent.putExtra("Driver", driver);
+        intent.putExtra("Odom", Odom);
+        int[] start = mazeConfig.getStartingPosition();
+        intent.putExtra("short", mazeConfig.getDistanceToExit(start[0], start[1]));
 
         this.startActivity(intent);
     }
@@ -409,9 +436,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
     }
     /**
      * Rotates Robot Left, Simulates "button press"
-     * @param view
+     *
      */
-    public void moveLeft(View view){
+    public void moveLeft(){
         Toast.makeText(this, "Move Player Left", Toast.LENGTH_SHORT).show();
         Log.v("Manual - Move", "Move Left");
         rotate(1);
@@ -420,9 +447,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
 
     /**
      * Rotates Robot Right, Simulates "button press"
-     * @param view
+     *
      */
-    public void moveRight(View view){
+    public void moveRight(){
         Toast.makeText(this, "Move Player Right", Toast.LENGTH_SHORT).show();
         Log.v("Manual - Move", "Move Right");
         rotate(-1);

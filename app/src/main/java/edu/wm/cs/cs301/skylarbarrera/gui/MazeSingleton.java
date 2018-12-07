@@ -7,7 +7,7 @@ public class MazeSingleton {
     private  MazeConfiguration mazeConfig;
 
 
-    private MazeSingleton(){}
+    protected MazeSingleton(){}
 
 
     public void setData(MazeConfiguration mf){

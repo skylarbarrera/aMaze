@@ -12,19 +12,30 @@ public class LosingActivity extends AppCompatActivity {
     private String driver;
     private String Gen;
     private String mazeDif;
+    private int Odom;
+    private int energy;
+    private int shorte;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_losing);
-        driver = getIntent().getStringExtra("Driver");
-        Gen = getIntent().getStringExtra("Gen");
-        mazeDif = getIntent().getStringExtra("MazeDifValue");
+        //driver = getIntent().getStringExtra("Driver");
+        //Gen = getIntent().getStringExtra("Gen");
+        //mazeDif = getIntent().getStringExtra("MazeDifValue");
+        Odom = getIntent().getIntExtra("Odom", Odom);
+        energy = getIntent().getIntExtra("Battery",energy);
+        shorte = getIntent().getIntExtra("short", shorte);
 
         deathText = (TextView)findViewById(R.id.deathText);
 
-        deathText.setText("Robot Ran into wall and is damaged");
-        deathText.setText("You Ran Out of Energy");
+        if (energy < 5 ) {
+            deathText.setText("You Ran Out of Energy. Odometer reading - " + Odom + " Short Path was " + shorte);
+        } else {
+
+
+            deathText.setText("Robot Ran into wall and is damaged");
+        }
     }
 
 

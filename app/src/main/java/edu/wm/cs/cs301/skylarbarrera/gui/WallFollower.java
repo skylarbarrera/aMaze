@@ -68,7 +68,7 @@ public class WallFollower implements RobotDriver {
 		
 		//record starting position for comparison 
 		int[] sPos = robot.getCurrentPosition();
-		
+
 		//while we are not at exit 
 		while (!robot.isAtExit()) {
 			//if stopped end alg and fail
@@ -125,6 +125,7 @@ public class WallFollower implements RobotDriver {
 		}
 		
 		//checks directions around robot and then moves into exit door
+		atExit();
 		atExit();
 		
 		return true;
